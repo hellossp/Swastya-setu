@@ -6,6 +6,41 @@ import { useRouter } from "next/navigation";
 import { performOCR } from "@/lib/ocr";
 import Loader from "@/components/ui/Loader";
 
+// Helper to dynamically load PDF.js from CDN
+const loadPdfJs = () => {
+  return new Promise((resolve, reject) => {
+    if (window.pdfjsLib) {
+      resolve(window.pdfjsLib);
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js";
+    script.onload = () => {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js";
+      resolve(window.pdfjsLib);
+    };
+    script.onerror = () => {
+      reject(new Error("Failed to load PDF parsing library."));
+    };
+    document.head.appendChild(script);
+  });
+};
+
+// Helper to extract text from PDF file in browser
+const extractTextFromPdf = async (file) => {
+  const pdfjsLib = await loadPdfJs();
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  let text = "";
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const strings = content.items.map((item) => item.str);
+    text += strings.join(" ") + "\n";
+  }
+  return text;
+};
+
 export default function UploadBox() {
   const router = useRouter();
   const [file, setFile] = useState(null);
@@ -48,19 +83,57 @@ export default function UploadBox() {
           body: JSON.stringify({ text: extractedText }),
         });
 
+        if (!response.ok) {
+          throw new Error(`Server returned error: ${response.statusText || response.status}`);
+        }
+
         analysisResult = await response.json();
       } else {
         setLoadingMsg("Extracting pathology data from PDF report...");
         
-        const formData = new FormData();
-        formData.append("file", uploadedFile);
+        try {
+          // Attempt client-side PDF text extraction
+          extractedText = await extractTextFromPdf(uploadedFile);
+          
+          if (!extractedText || extractedText.trim().length === 0) {
+            throw new Error("No selectable text found in the PDF. If this is a scanned PDF, please upload it as an image (JPG/PNG).");
+          }
 
-        const response = await fetch("/api/extract", {
-          method: "POST",
-          body: formData,
-        });
+          setLoadingMsg("Analyzing report parameters and clinical ranges...");
+          
+          const response = await fetch("/api/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: extractedText }),
+          });
 
-        analysisResult = await response.json();
+          if (!response.ok) {
+            throw new Error(`Server returned error: ${response.statusText || response.status}`);
+          }
+
+          analysisResult = await response.json();
+        } catch (clientPdfError) {
+          console.warn("Client-side PDF extraction failed, trying server-side backup:", clientPdfError);
+          
+          // Fall back to server-side PDF extraction if client-side failed
+          setLoadingMsg("Running server-side backup extraction...");
+          const formData = new FormData();
+          formData.append("file", uploadedFile);
+
+          const response = await fetch("/api/extract", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            if (response.status === 413) {
+              throw new Error("The file is too large for server-side processing. Vercel restricts uploads to 4.5MB. Please upload a smaller PDF or an image.");
+            }
+            throw new Error(`Server returned error: ${response.statusText || response.status}`);
+          }
+
+          analysisResult = await response.json();
+        }
       }
 
       if (analysisResult && analysisResult.success) {
