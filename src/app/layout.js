@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import AuthGuard from "@/components/auth/AuthGuard";
 
 export const metadata = {
   title: "SwasthyaSetu",
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
         <Navbar />
 
         <div className="flex-1 flex flex-col">
-          {children}
+          <AuthGuard>
+            {children}
+          </AuthGuard>
         </div>
 
         <Footer />
