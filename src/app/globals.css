@@ -1,26 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-primary-maroon: #7A3B2E;
+  --color-beige-bg: #F5EFE6;
+  --color-accent-gold: #D4A373;
+  --color-white-card: #FFFFFF;
+  
+  --color-success-green: #16A34A;
+  --color-warning-yellow: #FACC15;
+  --color-danger-red: #DC2626;
+  --color-critical-red: #7F1D1D;
+  
+  --font-sans: 'Outfit', 'Inter', sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F5EFE6;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  color: #1F2937;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(122, 59, 46, 0.08);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px 0 rgba(122, 59, 46, 0.12);
+  border: 1px solid rgba(122, 59, 46, 0.15);
+}
+
+/* Elegant Sambalpuri-inspired subtle patterns */
+.sambalpuri-pattern {
+  background-image: radial-gradient(rgba(122, 59, 46, 0.1) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Premium micro-animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: .95;
+    transform: scale(1.01);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* Glow effects for indicators */
+.glow-green {
+  box-shadow: 0 0 15px rgba(22, 163, 74, 0.3);
+}
+
+.glow-orange {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.3);
+}
+
+.glow-red {
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+}
+
+.glow-critical {
+  box-shadow: 0 0 20px rgba(127, 29, 29, 0.4);
 }

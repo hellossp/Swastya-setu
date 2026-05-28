@@ -1,0 +1,742 @@
+[
+  {
+    "id": "hemoglobin",
+    "name": {
+      "en": "Hemoglobin",
+      "od": "ହିମୋଗ୍ଲୋବିନ"
+    },
+    "aliases": [
+      "hb",
+      "hgb",
+      "hemoglobin",
+      "haemoglobin"
+    ],
+    "category": "Hematology",
+    "unit": "g/dL",
+    "normalRange": {
+      "male": {
+        "min": 13,
+        "max": 17.5
+      },
+      "female": {
+        "min": 12,
+        "max": 15.5
+      }
+    },
+    "criticalRange": {
+      "min": 8.0,
+      "max": 18.0
+    },
+    "description": {
+      "en": "Hemoglobin carries oxygen throughout the body.",
+      "od": "ହିମୋଗ୍ଲୋବିନ ଶରୀରରେ ଅକ୍ସିଜେନ ବହନ କରେ।"
+    },
+    "remarks": {
+      "low": "Low hemoglobin may indicate anemia. Eat iron-rich foods.",
+      "normal": "Hemoglobin level is healthy.",
+      "high": "High hemoglobin may indicate dehydration or carbon exposure.",
+      "critical": "CRITICAL: Severe anemia or highly viscous blood. Immediate medical review needed."
+    }
+  },
+  {
+    "id": "rbc_count",
+    "name": {
+      "en": "RBC Count",
+      "od": "ଆର୍‌ବିସି ଗଣନା"
+    },
+    "aliases": [
+      "rbc",
+      "red blood cell",
+      "total rbc count"
+    ],
+    "category": "Hematology",
+    "unit": "million cells/mcL",
+    "normalRange": {
+      "male": {
+        "min": 4.7,
+        "max": 6.1
+      },
+      "female": {
+        "min": 4.2,
+        "max": 5.4
+      }
+    },
+    "description": {
+      "en": "RBCs carry oxygen in blood.",
+      "od": "ଆର୍‌ବିସି ରକ୍ତରେ ଅକ୍ସିଜେନ ବହନ କରେ।"
+    },
+    "remarks": {
+      "low": "Low RBC count may indicate anemia.",
+      "normal": "RBC count is normal.",
+      "high": "High RBC count may indicate dehydration."
+    }
+  },
+  {
+    "id": "wbc_count",
+    "name": {
+      "en": "WBC Count",
+      "od": "ଡବ୍ଲ୍ୟୁବିସି ଗଣନା"
+    },
+    "aliases": [
+      "wbc",
+      "tlc",
+      "white blood cell",
+      "total leucocyte count"
+    ],
+    "category": "Hematology",
+    "unit": "cells/uL",
+    "normalRange": {
+      "min": 4000,
+      "max": 11000
+    },
+    "description": {
+      "en": "WBCs help fight infections.",
+      "od": "ଡବ୍ଲ୍ୟୁବିସି ସଂକ୍ରମଣ ସହିତ ଲଢେ।"
+    },
+    "remarks": {
+      "low": "Low WBC may weaken immunity.",
+      "normal": "WBC count is healthy.",
+      "high": "High WBC may indicate infection or inflammation."
+    }
+  },
+  {
+    "id": "platelet_count",
+    "name": {
+      "en": "Platelet Count",
+      "od": "ପ୍ଲେଟଲେଟ ଗଣନା"
+    },
+    "aliases": [
+      "platelet",
+      "platelets",
+      "platelet count"
+    ],
+    "category": "Hematology",
+    "unit": "cells/uL",
+    "normalRange": {
+      "min": 150000,
+      "max": 450000
+    },
+    "criticalRange": {
+      "min": 20000
+    },
+    "description": {
+      "en": "Platelets help blood clotting and tissue healing.",
+      "od": "ପ୍ଲେଟଲେଟ ରକ୍ତ ଜମାହେବାରେ ସାହାଯ୍ୟ କରେ।"
+    },
+    "remarks": {
+      "low": "Low platelets may increase bleeding risk. Common in viral infections.",
+      "normal": "Platelet count is normal.",
+      "high": "High platelets may indicate inflammation or infection.",
+      "critical": "CRITICAL: Platelets are dangerously low. High bleeding risk! Emergency care needed."
+    }
+  },
+  {
+    "id": "blood_glucose",
+    "name": {
+      "en": "Blood Glucose",
+      "od": "ରକ୍ତ ଶର୍କରା"
+    },
+    "aliases": [
+      "blood sugar",
+      "glucose",
+      "fbs",
+      "fasting blood sugar",
+      "random blood sugar",
+      "rbs"
+    ],
+    "category": "Diabetes",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 70,
+      "max": 140
+    },
+    "description": {
+      "en": "Measures sugar level in blood.",
+      "od": "ରକ୍ତରେ ଶର୍କରାର ମାତ୍ରା ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low sugar (Hypoglycemia) may cause weakness or dizziness.",
+      "normal": "Blood sugar level is healthy.",
+      "high": "High sugar (Hyperglycemia) may indicate prediabetes or diabetes."
+    }
+  },
+  {
+    "id": "hba1c",
+    "name": {
+      "en": "HbA1c",
+      "od": "ଏଚ୍‌ବିଏ୧ସି"
+    },
+    "aliases": [
+      "hba1c",
+      "glycated hemoglobin",
+      "glycosylated hemoglobin"
+    ],
+    "category": "Diabetes",
+    "unit": "%",
+    "normalRange": {
+      "min": 4.0,
+      "max": 5.6
+    },
+    "description": {
+      "en": "Shows average blood sugar over 3 months.",
+      "od": "୩ ମାସର ମଧ୍ୟମ ରକ୍ତ ଶର୍କରା ଦେଖାଏ।"
+    },
+    "remarks": {
+      "low": "Low HbA1c may indicate low average glucose levels.",
+      "normal": "HbA1c is in a healthy range.",
+      "high": "High HbA1c indicates prediabetes (5.7%-6.4%) or diabetes (>=6.5%)."
+    }
+  },
+  {
+    "id": "creatinine",
+    "name": {
+      "en": "Creatinine",
+      "od": "କ୍ରିଏଟିନିନ"
+    },
+    "aliases": [
+      "creatinine",
+      "serum creatinine"
+    ],
+    "category": "Kidney Function",
+    "unit": "mg/dL",
+    "normalRange": {
+      "male": {
+        "min": 0.7,
+        "max": 1.3
+      },
+      "female": {
+        "min": 0.6,
+        "max": 1.1
+      }
+    },
+    "description": {
+      "en": "Checks kidney waste filtration efficiency.",
+      "od": "ବୃକ୍କର କାର୍ଯ୍ୟକ୍ଷମତା ଯାଞ୍ଚ କରେ।"
+    },
+    "remarks": {
+      "low": "Low creatinine is usually harmless and linked to low muscle mass.",
+      "normal": "Kidney filtration function appears healthy.",
+      "high": "High creatinine indicates reduced kidney function."
+    }
+  },
+  {
+    "id": "blood_urea",
+    "name": {
+      "en": "Blood Urea",
+      "od": "ରକ୍ତ ଇଉରିଆ"
+    },
+    "aliases": [
+      "blood urea",
+      "urea"
+    ],
+    "category": "Kidney Function",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 15,
+      "max": 45
+    },
+    "description": {
+      "en": "Measures protein waste filtered by kidneys.",
+      "od": "ବୃକ୍କ ଦ୍ୱାରା ଫିଲ୍ଟର ହେଉଥିବା ବର୍ଜ୍ୟ ପଦାର୍ଥ ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low urea is rare and usually not serious.",
+      "normal": "Blood urea is within the normal range.",
+      "high": "High urea indicates kidney dysfunction, dehydration, or high protein intake."
+    }
+  },
+  {
+    "id": "cholesterol",
+    "name": {
+      "en": "Total Cholesterol",
+      "od": "ମୋଟ କୋଲେଷ୍ଟେରଲ"
+    },
+    "aliases": [
+      "cholesterol",
+      "total cholesterol"
+    ],
+    "category": "Lipid Profile",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 125,
+      "max": 200
+    },
+    "description": {
+      "en": "Measures total cholesterol fat in blood.",
+      "od": "ରକ୍ତରେ ମୋଟ କୋଲେଷ୍ଟେରଲ ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low cholesterol is generally fine.",
+      "normal": "Cholesterol level is healthy.",
+      "high": "High cholesterol (>=240 mg/dL) increases risk of cardiovascular disease."
+    }
+  },
+  {
+    "id": "triglycerides",
+    "name": {
+      "en": "Triglycerides",
+      "od": "ଟ୍ରାଇଗ୍ଲିସରାଇଡ୍"
+    },
+    "aliases": [
+      "triglycerides",
+      "tg"
+    ],
+    "category": "Lipid Profile",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 0,
+      "max": 150
+    },
+    "description": {
+      "en": "Measures stored fats in blood for energy.",
+      "od": "ରକ୍ତରେ ଚର୍ବିର ମାତ୍ରା ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low triglycerides are usually healthy.",
+      "normal": "Triglyceride level is normal.",
+      "high": "High triglycerides raise risk of heart issues. Very High (>=500) raises pancreas risk."
+    }
+  },
+  {
+    "id": "hdl",
+    "name": {
+      "en": "HDL Cholesterol",
+      "od": "ଏଚ୍‌ଡିଏଲ୍ କୋଲେଷ୍ଟେରଲ"
+    },
+    "aliases": [
+      "hdl",
+      "hdl cholesterol",
+      "good cholesterol"
+    ],
+    "category": "Lipid Profile",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 40,
+      "max": 100
+    },
+    "description": {
+      "en": "HDL is 'good' cholesterol protecting the heart.",
+      "od": "ଏଚ୍‌ଡିଏଲ୍ ଭଲ କୋଲେଷ୍ଟେରଲ ଅଟେ।"
+    },
+    "remarks": {
+      "low": "Low HDL increases cardiovascular risks.",
+      "normal": "HDL level is healthy and protective.",
+      "high": "High HDL is excellent and heart-protective."
+    }
+  },
+  {
+    "id": "ldl",
+    "name": {
+      "en": "LDL Cholesterol",
+      "od": "ଏଲ୍‌ଡିଏଲ୍ କୋଲେଷ୍ଟେରଲ"
+    },
+    "aliases": [
+      "ldl",
+      "ldl cholesterol",
+      "bad cholesterol"
+    ],
+    "category": "Lipid Profile",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 0,
+      "max": 100
+    },
+    "description": {
+      "en": "LDL is 'bad' cholesterol causing plaque in arteries.",
+      "od": "ଏଲ୍‌ଡିଏଲ୍ ଖରାପ କୋଲେଷ୍ଟେରଲ ଅଟେ।"
+    },
+    "remarks": {
+      "low": "Low LDL is healthy.",
+      "normal": "LDL level is acceptable.",
+      "high": "High LDL increases arterial blockages and heart risks."
+    }
+  },
+  {
+    "id": "esr",
+    "name": {
+      "en": "ESR",
+      "od": "ଇଏସଆର"
+    },
+    "aliases": [
+      "esr",
+      "erythrocyte sedimentation rate"
+    ],
+    "category": "Hematology",
+    "unit": "mm/hr",
+    "normalRange": {
+      "male": {
+        "min": 0,
+        "max": 15
+      },
+      "female": {
+        "min": 0,
+        "max": 20
+      }
+    },
+    "description": {
+      "en": "Measures hidden inflammation caused by infection or chronic conditions.",
+      "od": "ସଂକ୍ରମଣ କିମ୍ବା ପ୍ରଦାହ ଜନିତ ସ୍ଥିତି ଯାଞ୍ଚ କରିବାରେ ସାହାଯ୍ୟ କରେ।"
+    },
+    "remarks": {
+      "low": "Slow sedimentation rate, usually normal.",
+      "normal": "Sedimentation rate is normal. No signs of active inflammation.",
+      "high": "Elevated rate indicates active inflammation, infection, or chronic condition."
+    }
+  },
+  {
+    "id": "pt_inr",
+    "name": {
+      "en": "PT-INR",
+      "od": "ପିଟି-ଆଇଏନଆର"
+    },
+    "aliases": [
+      "pt-inr",
+      "inr",
+      "pt inr",
+      "prothrombin time"
+    ],
+    "category": "Hematology",
+    "unit": "",
+    "normalRange": {
+      "min": 0.8,
+      "max": 1.1
+    },
+    "description": {
+      "en": "Measures how long it takes blood to clot (blood thinness test).",
+      "od": "ରକ୍ତ ଜମାଟ ବାନ୍ଧିବା ପାଇଁ କେତେ ସମୟ ଲାଗେ ତାହା ମାପେ।"
+    },
+    "remarks": {
+      "low": "Blood clots too quickly, raising risk of strokes or clots.",
+      "normal": "Blood clotting rate is healthy.",
+      "high": "Blood clots too slowly, raising bleeding risks. Caution with injuries."
+    }
+  },
+  {
+    "id": "pcv",
+    "name": {
+      "en": "PCV",
+      "od": "ପିସିଭି"
+    },
+    "aliases": [
+      "pcv",
+      "packed cell volume",
+      "hematocrit",
+      "hct"
+    ],
+    "category": "Hematology",
+    "unit": "%",
+    "normalRange": {
+      "male": {
+        "min": 40,
+        "max": 54
+      },
+      "female": {
+        "min": 36,
+        "max": 48
+      }
+    },
+    "description": {
+      "en": "Measures the percentage of red blood cells in the blood.",
+      "od": "ରକ୍ତରେ ଲାଲ୍ ରକ୍ତ କଣିକାର ପ୍ରତିଶତ ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low volume indicates anemia.",
+      "normal": "Packed cell volume is normal.",
+      "high": "High volume indicates dehydration or excess red cells."
+    }
+  },
+  {
+    "id": "sodium",
+    "name": {
+      "en": "Serum Sodium",
+      "od": "ସୋଡିୟମ୍"
+    },
+    "aliases": [
+      "sodium",
+      "na+",
+      "serum sodium"
+    ],
+    "category": "Electrolytes",
+    "unit": "mEq/L",
+    "normalRange": {
+      "min": 135,
+      "max": 145
+    },
+    "criticalRange": {
+      "min": 130,
+      "max": 150
+    },
+    "description": {
+      "en": "Key electrolyte that regulates fluid balance, nerve and muscle function.",
+      "od": "ରକ୍ତରେ ସୋଡିୟମର ମାତ୍ରା ମାପେ ଯାହା ଶରୀରରେ ଜଳ ସନ୍ତୁଳନ ରଖେ।"
+    },
+    "remarks": {
+      "low": "Hyponatremia. Low sodium can cause fatigue and confusion.",
+      "normal": "Sodium level is normal and balanced.",
+      "high": "Hypernatremia. High sodium is usually due to dehydration.",
+      "critical": "CRITICAL: Sodium level is extremely abnormal. Urgent medical review required!"
+    }
+  },
+  {
+    "id": "potassium",
+    "name": {
+      "en": "Serum Potassium",
+      "od": "ପୋଟାସିୟମ୍"
+    },
+    "aliases": [
+      "potassium",
+      "k+",
+      "serum potassium"
+    ],
+    "category": "Electrolytes",
+    "unit": "mmol/L",
+    "normalRange": {
+      "min": 3.6,
+      "max": 5.2
+    },
+    "criticalRange": {
+      "min": 2.5,
+      "max": 6.5
+    },
+    "description": {
+      "en": "Critical electrolyte for heart rhythm, nerve, and muscle cells.",
+      "od": "ରକ୍ତରେ ପୋଟାସିୟମର ମାତ୍ରା ମାପେ, ଯାହା ହୃଦୟର କାର୍ଯ୍ୟ ପାଇଁ ଗୁਰୁତ୍ୱପୂର୍ଣ୍ଣ।"
+    },
+    "remarks": {
+      "low": "Hypokalemia. Low potassium can cause muscle weakness or cramping.",
+      "normal": "Potassium level is healthy.",
+      "high": "Hyperkalemia. High potassium can disrupt heart rhythm.",
+      "critical": "CRITICAL: Potassium level is dangerous. Risk of cardiac issues. See doctor immediately!"
+    }
+  },
+  {
+    "id": "calcium",
+    "name": {
+      "en": "Serum Calcium",
+      "od": "କ୍ୟାଲସିୟମ୍"
+    },
+    "aliases": [
+      "calcium",
+      "ca++",
+      "serum calcium"
+    ],
+    "category": "Electrolytes",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 8.5,
+      "max": 10.5
+    },
+    "criticalRange": {
+      "min": 6.0,
+      "max": 13.0
+    },
+    "description": {
+      "en": "Essential mineral for bone health, heart, muscle, and nerve function.",
+      "od": "ହାଡ ଏବଂ ହୃଦୟର ସ୍ୱାସ୍ଥ୍ୟ ପାଇଁ କ୍ୟାଲସିୟମ୍ ମାପେ।"
+    },
+    "remarks": {
+      "low": "Hypocalcemia. Low calcium can affect bones and nerves.",
+      "normal": "Calcium level is balanced.",
+      "high": "Hypercalcemia. High calcium can lead to kidney stones.",
+      "critical": "CRITICAL: Calcium level is extremely abnormal. High risk of muscle spasms or heart strain."
+    }
+  },
+  {
+    "id": "amylase",
+    "name": {
+      "en": "Serum Amylase",
+      "od": "ଏମାଇଲେଜ୍"
+    },
+    "aliases": [
+      "amylase",
+      "serum amylase"
+    ],
+    "category": "Pancreas",
+    "unit": "U/L",
+    "normalRange": {
+      "min": 30,
+      "max": 110
+    },
+    "criticalRange": {
+      "max": 330
+    },
+    "description": {
+      "en": "Pancreatic enzyme that helps digest carbohydrates.",
+      "od": "ଅଗ୍ନ୍ୟାଶୟ ଏନଜାଇମ ଯାହା ଖାଦ୍ୟ ହଜମ କରିବାରେ ସାହାଯ୍ୟ କରେ।"
+    },
+    "remarks": {
+      "low": "Low amylase suggests chronic pancreatic damage.",
+      "normal": "Amylase level is normal.",
+      "high": "Elevated amylase indicates pancreatic irritation.",
+      "critical": "CRITICAL: Amylase is extremely high. High risk of acute pancreatitis. Seek immediate care."
+    }
+  },
+  {
+    "id": "tsh",
+    "name": {
+      "en": "TSH",
+      "od": "ଟିଏସଏଚ"
+    },
+    "aliases": [
+      "tsh",
+      "thyroid stimulating hormone"
+    ],
+    "category": "Thyroid",
+    "unit": "mIU/L",
+    "normalRange": {
+      "min": 0.4,
+      "max": 4.0
+    },
+    "description": {
+      "en": "Pituitary hormone that manages thyroid activity.",
+      "od": "ହରମୋନ୍ ଯାହା ଥାଇରଏଡ୍ ଗ୍ରନ୍ଥିକୁ ନିୟନ୍ତ୍ରଣ କରେ।"
+    },
+    "remarks": {
+      "low": "Low TSH indicates an overactive thyroid (Hyperthyroidism).",
+      "normal": "TSH level is healthy.",
+      "high": "High TSH indicates an underactive thyroid (Hypothyroidism)."
+    }
+  },
+  {
+    "id": "vit_d",
+    "name": {
+      "en": "Vitamin D",
+      "od": "ଭିଟାମିନ୍ ଡି"
+    },
+    "aliases": [
+      "vit d",
+      "vitamin d",
+      "25-hydroxy vitamin d",
+      "vitamin d3",
+      "25(oh)d"
+    ],
+    "category": "Vitamins",
+    "unit": "ng/mL",
+    "normalRange": {
+      "min": 30,
+      "max": 100
+    },
+    "description": {
+      "en": "Helps the body absorb calcium for bone health and immune function.",
+      "od": "ଶରୀରକୁ କ୍ୟାଲସିୟମ ଶୋଷଣ କରିବାରେ ସାହାଯ୍ୟ କରେ।"
+    },
+    "remarks": {
+      "low": "Vitamin D deficiency. High risk of bone loss and chronic fatigue. Supplements advised.",
+      "normal": "Vitamin D level is healthy and optimal.",
+      "high": "Vitamin D toxicity. High level can cause calcium buildup."
+    }
+  },
+  {
+    "id": "vit_b12",
+    "name": {
+      "en": "Vitamin B12",
+      "od": "ଭିଟାମିନ୍ ବି୧୨"
+    },
+    "aliases": [
+      "vit b12",
+      "vitamin b12",
+      "cobalamin",
+      "b12"
+    ],
+    "category": "Vitamins",
+    "unit": "pg/mL",
+    "normalRange": {
+      "min": 300,
+      "max": 900
+    },
+    "description": {
+      "en": "Essential vitamin for DNA synthesis and nerve cell protection.",
+      "od": "ରକ୍ତ କଣିକା ଏବଂ ସ୍ନାୟୁ ସ୍ୱାସ୍ଥ୍ୟ ପାଇଁ ଗୁرୁତ୍ୱପୂର୍ଣ୍ଣ।"
+    },
+    "remarks": {
+      "low": "B12 deficiency. Risk of nerve tingling, fatigue, and macrocytic anemia.",
+      "normal": "Vitamin B12 level is healthy.",
+      "high": "Elevated B12 level, usually due to supplements."
+    }
+  },
+  {
+    "id": "crp",
+    "name": {
+      "en": "CRP",
+      "od": "ସିଆରପି"
+    },
+    "aliases": [
+      "crp",
+      "c-reactive protein",
+      "c reactive protein"
+    ],
+    "category": "Immunology",
+    "unit": "mg/L",
+    "normalRange": {
+      "min": 0,
+      "max": 10
+    },
+    "description": {
+      "en": "Protein produced by liver indicating active infection or inflammation.",
+      "od": "ଶରୀରରେ ସଂକ୍ରମଣ କିମ୍ବା ପ୍ରଦାହର ମାତ୍ରା ସୂଚିତ କରେ।"
+    },
+    "remarks": {
+      "low": "Normal. No active inflammation.",
+      "normal": "Normal level. No significant inflammation.",
+      "high": "Elevated CRP. Indicates active bacterial infection, acute injury, or inflammatory condition."
+    }
+  },
+  {
+    "id": "g6pd",
+    "name": {
+      "en": "G6PD",
+      "od": "ଜି୬ପିଡି"
+    },
+    "aliases": [
+      "g6pd",
+      "g-6-pd",
+      "glucose-6-phosphate dehydrogenase"
+    ],
+    "category": "Enzymes",
+    "unit": "U/g Hb",
+    "normalRange": {
+      "min": 7.0,
+      "max": 20.5
+    },
+    "description": {
+      "en": "Red blood cell enzyme protecting cells from oxidative stress and damage.",
+      "od": "ଏଞ୍ଜାଇମ ଯାହା ଲୋହିତ ରକ୍ତ କଣିକାକୁ ନଷ୍ଟ ହେବାରୁ ରକ୍ତ କଣିକାକୁ ସୁରକ୍ଷା ଦିଏ।"
+    },
+    "remarks": {
+      "low": "Deficient. Red cells are prone to breakage. Check warning list for drugs/foods.",
+      "normal": "G6PD enzyme level is normal and protective.",
+      "high": "G6PD level is normal/high."
+    }
+  },
+  {
+    "id": "dengue",
+    "name": {
+      "en": "Dengue Test",
+      "od": "ଡେଙ୍ଗୁ ପରୀକ୍ଷା"
+    },
+    "aliases": [
+      "dengue ns1",
+      "dengue igm",
+      "dengue test",
+      "dengue virus"
+    ],
+    "category": "Infectious Diseases",
+    "unit": "",
+    "normalRangeText": "Negative",
+    "normalValues": [
+      "negative",
+      "non-reactive"
+    ],
+    "abnormalStatus": "High",
+    "description": {
+      "en": "Screens for Dengue virus antigen (NS1) or antibodies (IgM/IgG).",
+      "od": "ଡେଙ୍ଗୁ ଜ୍ୱର ସଂକ୍ରମଣ ଚିହ୍ନଟ କରିବା ପାଇଁ ଯାଞ୍ଚ।"
+    },
+    "remarks": {
+      "low": "Negative. No active Dengue infection.",
+      "normal": "Negative. No active Dengue infection.",
+      "high": "Positive. Active or recent Dengue virus infection detected.",
+      "critical": "CRITICAL: Positive Dengue infection with warning signs. Hospital care may be needed."
+    }
+  }
+]
