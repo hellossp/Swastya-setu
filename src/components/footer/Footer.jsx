@@ -51,12 +51,12 @@ export default function Footer() {
           <p className="font-semibold">
             {lang === "en" ? "Developed by " : "ବିକଶିତ କରିଛନ୍ତି "}
             <a
-              href="https://www.instagram.com/noobdeveloper_products?igsh=MW9sanRtajVxM3Azdg=="
+              href="https://www.instagram.com/instant_pages?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#F5EFE6] underline hover:text-white transition duration-200"
             >
-              noobDeveloper
+              instant pages
             </a>
           </p>
         </div>
