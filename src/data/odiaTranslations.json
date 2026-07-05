@@ -149,5 +149,11 @@
   "G6PD level is normal/high.": "ଜି୬ପିଡ଼ି ମାତ୍ରା ସ୍ୱାଭାବିକ ଅଛି।",
   "Negative. No active Dengue infection.": "ନେଗେଟିଭ୍। କୌଣସି ଡେଙ୍ଗୁ ସଂକ୍ରମଣ ନାହିଁ।",
   "Positive. Active or recent Dengue virus infection detected.": "ପଜିଟିଭ୍। ଡେଙ୍ଗୁ ଭୂତାଣୁ ସଂକ୍ରମଣ ଚିହ୍ନଟ ହୋଇଛି।",
-  "CRITICAL: Positive Dengue infection with warning signs. Hospital care may be needed.": "ଜରୁରୀକାଳୀନ: ପଜିଟିଭ୍ ଡେଙ୍ଗୁ। ତୁରନ୍ତ ଡାକ୍ତରଖାନା ଯିବା ଆବଶ୍ୟକ।"
+  "CRITICAL: Positive Dengue infection with warning signs. Hospital care may be needed.": "ଜରୁରୀକାଳୀନ: ପଜିଟିଭ୍ ଡେଙ୍ଗୁ। ତୁରନ୍ତ ଡାକ୍ତରଖାନା ଯିବା ଆବଶ୍ୟକ।",
+  "Low T3 may indicate hypothyroidism or severe non-thyroidal illness.": "କମ୍ ଟି୩ ହାଇପୋଥାଇରଏଡିଜିମ୍ କିମ୍ବା ଅନ୍ୟାନ୍ୟ ସ୍ୱାସ୍ଥ୍ୟ ସମସ୍ୟା ଦର୍ଶାଇପାରେ।",
+  "T3 level is healthy.": "ଟି୩ ମାତ୍ରା ସ୍ୱାଭାବିକ ଅଛି।",
+  "High T3 indicates hyperthyroidism.": "ଅଧିକ ଟି୩ ଥାଇରଏଡ୍ର ଅତ୍ୟଧିକ ସକ୍ରିୟତାକୁ ଦର୍ଶାଏ (Hyperthyroidism)।",
+  "Low T4 indicates hypothyroidism.": "କମ୍ ଟି୪ ହାଇପୋଥାଇରଏଡିଜିମ୍ ଦର୍ଶାଏ (Hypothyroidism)।",
+  "T4 level is healthy.": "ଟି୪ ମାତ୍ରା ସ୍ୱାଭାବିକ ଅଛି।",
+  "High T4 indicates hyperthyroidism.": "ଅଧିକ ଟି୪ ଥାଇରଏଡ୍ର ଅତ୍ୟଧିକ ସକ୍ରିୟତାକୁ ଦର୍ଶାଏ (Hyperthyroidism)।"
 }

@@ -572,6 +572,60 @@
     }
   },
   {
+    "id": "t3_total",
+    "name": {
+      "en": "T3, Total",
+      "od": "ଟି୩ (T3, Total)"
+    },
+    "aliases": [
+      "t3, total",
+      "t3 total",
+      "t3"
+    ],
+    "category": "Thyroid",
+    "unit": "ng/mL",
+    "normalRange": {
+      "min": 0.6,
+      "max": 1.81
+    },
+    "description": {
+      "en": "Triiodothyronine (T3) is an active thyroid hormone that helps regulate metabolism.",
+      "od": "ଟି୩ (T3) ହେଉଛି ଏକ ସକ୍ରିୟ ଥାଇରଏଡ୍ ହରମୋନ୍ ଯାହା ମେଟାବୋଲିଜିମ୍ ନିୟନ୍ତ୍ରଣ କରିବାରେ ସାହାଯ୍ୟ କରେ।"
+    },
+    "remarks": {
+      "low": "Low T3 may indicate hypothyroidism or severe non-thyroidal illness.",
+      "normal": "T3 level is healthy.",
+      "high": "High T3 indicates hyperthyroidism."
+    }
+  },
+  {
+    "id": "t4_total",
+    "name": {
+      "en": "T4, Total",
+      "od": "ଟି୪ (T4, Total)"
+    },
+    "aliases": [
+      "t4, total",
+      "t4 total",
+      "t4"
+    ],
+    "category": "Thyroid",
+    "unit": "ug/dL",
+    "normalRange": {
+      "min": 4.5,
+      "max": 11.6
+    },
+    "description": {
+      "en": "Thyroxine (T4) is the primary hormone produced by the thyroid gland.",
+      "od": "ଟି୪ (T4) ହେଉଛି ଥାଇରଏଡ୍ ଗ୍ରନ୍ଥି ଦ୍ୱାରା ପ୍ରସ୍ତୁତ ପ୍ରାଥମିକ ହରମୋନ୍।"
+    },
+    "remarks": {
+      "low": "Low T4 indicates hypothyroidism.",
+      "normal": "T4 level is healthy.",
+      "high": "High T4 indicates hyperthyroidism."
+    }
+  },
+  {
     "id": "tsh",
     "name": {
       "en": "TSH",

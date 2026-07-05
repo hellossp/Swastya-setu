@@ -22,9 +22,10 @@ export function extractParameters(text, testsDatabase) {
       // Escape alias for regex safety
       const escapedAlias = alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       
-      // Match alias followed by any non-digit symbols/letters (like parenthesized units or dots) and then the value
+      // Match alias NOT followed by any letter or digit, followed by AT MOST 30 non-digit characters, and then the value.
+      // This prevents matching across unrelated text blocks or lines.
       const regex = new RegExp(
-        `(?:^|\\b|\\s)(${escapedAlias})[^0-9]*(positive|negative|reactive|non-reactive|normal|equivocal|scanty|\\d+\\+\\s*to\\s*\\d+|\\d+(?:\\.\\d+)?)\\b`,
+        `(?:^|\\b|\\s)(${escapedAlias})(?![a-zA-Z0-9])[^0-9]{0,30}(positive|negative|reactive|non-reactive|normal|equivocal|scanty|\\d+\\+\\s*to\\s*\\d+|\\d+(?:\\.\\d+)?)\\b`,
         "i"
       );
 
