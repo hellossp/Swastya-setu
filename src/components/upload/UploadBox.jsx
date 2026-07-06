@@ -37,20 +37,20 @@ const extractTextFromPdf = async (file) => {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
     
-    // Extract items with their bounding box coordinates
-    const items = content.items.map(item => ({
-      str: item.str,
-      x: item.transform[4],
-      y: item.transform[5]
-    }));
+    // Extract items with their bounding box coordinates, safely handling missing transforms
+    const items = content.items
+      .filter(item => item.str) // Must have at least some string content
+      .map(item => ({
+        str: item.str,
+        x: item.transform ? item.transform[4] : 0,
+        y: item.transform ? item.transform[5] : 0
+      }));
     
     // Sort items top-to-bottom, then left-to-right
     items.sort((a, b) => {
-      // If Y difference is small (less than 5 units), treat as same line
       if (Math.abs(a.y - b.y) < 5) {
-        return a.x - b.x; // Left to right
+        return a.x - b.x;
       }
-      // Top to bottom (standard PDF origin is bottom-left, so higher Y is top)
       return b.y - a.y;
     });
 
@@ -61,11 +61,16 @@ const extractTextFromPdf = async (file) => {
       if (lastY !== null && Math.abs(item.y - lastY) >= 5) {
         pageText += "\n"; // New line when Y changes significantly
       }
-      // Only add non-empty strings
-      if (item.str.trim() !== "") {
-        pageText += item.str.trim() + " ";
-      }
+      // Add the string directly (preserve internal spaces)
+      pageText += item.str + " ";
       lastY = item.y;
+    }
+    
+    // FALLBACK: If our coordinate sorting yielded empty text for some reason, 
+    // fallback to the simple original approach so we don't break extraction completely.
+    if (pageText.trim() === "") {
+      const simpleStrings = content.items.map((item) => item.str);
+      pageText = simpleStrings.join(" ");
     }
     
     fullText += pageText + "\n\n";
@@ -159,7 +164,7 @@ export default function UploadBox() {
 
           if (!response.ok) {
             if (response.status === 413) {
-              throw new Error("The file is too large for server-side backup processing. Vercel restricts uploads to 4.5MB, and client-side extraction failed. Please upload a clearer or smaller PDF.");
+              throw new Error("Client extraction failed: " + clientPdfError.message + " | And server fallback failed (File > 4.5MB).");
             }
             throw new Error(`Server returned error: ${response.statusText || response.status}`);
           }
