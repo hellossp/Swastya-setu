@@ -31,14 +31,46 @@ const extractTextFromPdf = async (file) => {
   const pdfjsLib = await loadPdfJs();
   const arrayBuffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  let text = "";
+  let fullText = "";
+  
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
-    const strings = content.items.map((item) => item.str);
-    text += strings.join(" ") + "\n";
+    
+    // Extract items with their bounding box coordinates
+    const items = content.items.map(item => ({
+      str: item.str,
+      x: item.transform[4],
+      y: item.transform[5]
+    }));
+    
+    // Sort items top-to-bottom, then left-to-right
+    items.sort((a, b) => {
+      // If Y difference is small (less than 5 units), treat as same line
+      if (Math.abs(a.y - b.y) < 5) {
+        return a.x - b.x; // Left to right
+      }
+      // Top to bottom (standard PDF origin is bottom-left, so higher Y is top)
+      return b.y - a.y;
+    });
+
+    let pageText = "";
+    let lastY = null;
+    
+    for (const item of items) {
+      if (lastY !== null && Math.abs(item.y - lastY) >= 5) {
+        pageText += "\n"; // New line when Y changes significantly
+      }
+      // Only add non-empty strings
+      if (item.str.trim() !== "") {
+        pageText += item.str.trim() + " ";
+      }
+      lastY = item.y;
+    }
+    
+    fullText += pageText + "\n\n";
   }
-  return text;
+  return fullText;
 };
 
 export default function UploadBox() {
@@ -127,7 +159,7 @@ export default function UploadBox() {
 
           if (!response.ok) {
             if (response.status === 413) {
-              throw new Error("The file is too large for server-side processing. Vercel restricts uploads to 4.5MB. Please upload a smaller PDF or an image.");
+              throw new Error("The file is too large for server-side backup processing. Vercel restricts uploads to 4.5MB, and client-side extraction failed. Please upload a clearer or smaller PDF.");
             }
             throw new Error(`Server returned error: ${response.statusText || response.status}`);
           }
@@ -173,6 +205,7 @@ export default function UploadBox() {
       "image/jpeg": [".jpg", ".jpeg"],
     },
     multiple: false,
+    maxSize: 10485760, // 10MB limit
   });
 
   return (
@@ -218,7 +251,7 @@ export default function UploadBox() {
           </h2>
 
           <p className="text-gray-600 mb-6 text-sm">
-            Upload PDF, JPG or PNG medical reports (Max 5MB)
+            Upload PDF, JPG or PNG medical reports (Max 10MB)
           </p>
 
           <button className="bg-primary-maroon text-white font-medium px-8 py-3 rounded-xl hover:bg-opacity-95 transition shadow-md shadow-primary-maroon/20 active:scale-95">
