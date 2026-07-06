@@ -83,6 +83,39 @@ const extractTextFromPdf = async (file) => {
   return fullText;
 };
 
+// Fallback to rasterize PDF and run OCR if no selectable text is found
+const ocrPdf = async (file, onProgress) => {
+  const pdfjsLib = await loadPdfJs();
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ 
+    data: arrayBuffer,
+    cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/",
+    cMapPacked: true,
+    standardFontDataUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/standard_fonts/"
+  }).promise;
+  let fullText = "";
+  
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale: 2.0 });
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    
+    const pageText = await performOCR(canvas, (pct) => {
+      // Scale progress across pages roughly
+      const basePct = ((i - 1) / pdf.numPages) * 100;
+      const pagePct = (pct / 100) * (100 / pdf.numPages);
+      if (onProgress) onProgress(Math.round(basePct + pagePct));
+    });
+    fullText += pageText + "\n\n";
+  }
+  return fullText;
+};
+
 export default function UploadBox() {
   const router = useRouter();
   const [file, setFile] = useState(null);
@@ -138,7 +171,7 @@ export default function UploadBox() {
           extractedText = await extractTextFromPdf(uploadedFile);
           
           if (!extractedText || extractedText.trim().length === 0) {
-            throw new Error("No selectable text found in the PDF. If this is a scanned PDF, please upload it as an image (JPG/PNG).");
+            throw new Error("NO_TEXT");
           }
 
           setLoadingMsg("Analyzing report parameters and clinical ranges...");
@@ -155,26 +188,45 @@ export default function UploadBox() {
 
           analysisResult = await response.json();
         } catch (clientPdfError) {
-          console.warn("Client-side PDF extraction failed, trying server-side backup:", clientPdfError);
-          
-          // Fall back to server-side PDF extraction if client-side failed
-          setLoadingMsg("Running server-side backup extraction...");
-          const formData = new FormData();
-          formData.append("file", uploadedFile);
+          if (clientPdfError.message === "NO_TEXT" || clientPdfError.message.includes("No selectable text")) {
+             console.warn("No selectable text found, falling back to PDF Image OCR...");
+             setLoadingMsg("Scanning Scanned PDF (OCR)...");
+             extractedText = await ocrPdf(uploadedFile, (pct) => setProgress(pct));
+             
+             if (!extractedText || extractedText.trim().length === 0) {
+               throw new Error("Even OCR could not find text in this PDF.");
+             }
+             
+             // Send OCR'd text to API
+             const response = await fetch("/api/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: extractedText }),
+             });
+             if (!response.ok) throw new Error(`Server returned error: ${response.statusText || response.status}`);
+             analysisResult = await response.json();
+          } else {
+            console.warn("Client-side PDF extraction failed, trying server-side backup:", clientPdfError);
+            
+            // Fall back to server-side PDF extraction if client-side failed
+            setLoadingMsg("Running server-side backup extraction...");
+            const formData = new FormData();
+            formData.append("file", uploadedFile);
 
-          const response = await fetch("/api/extract", {
-            method: "POST",
-            body: formData,
-          });
+            const response = await fetch("/api/extract", {
+              method: "POST",
+              body: formData,
+            });
 
-          if (!response.ok) {
-            if (response.status === 413) {
-              throw new Error("Client extraction failed: " + clientPdfError.message + " | And server fallback failed (File > 4.5MB).");
+            if (!response.ok) {
+              if (response.status === 413) {
+                throw new Error("Client extraction failed: " + clientPdfError.message + " | And server fallback failed (File > 4.5MB).");
+              }
+              throw new Error(`Server returned error: ${response.statusText || response.status}`);
             }
-            throw new Error(`Server returned error: ${response.statusText || response.status}`);
-          }
 
-          analysisResult = await response.json();
+            analysisResult = await response.json();
+          }
         }
       }
 
