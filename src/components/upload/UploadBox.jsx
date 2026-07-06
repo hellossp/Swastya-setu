@@ -30,7 +30,12 @@ const loadPdfJs = () => {
 const extractTextFromPdf = async (file) => {
   const pdfjsLib = await loadPdfJs();
   const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  const pdf = await pdfjsLib.getDocument({ 
+    data: arrayBuffer,
+    cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/",
+    cMapPacked: true,
+    standardFontDataUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/standard_fonts/"
+  }).promise;
   let fullText = "";
   
   for (let i = 1; i <= pdf.numPages; i++) {
