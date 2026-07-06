@@ -9,16 +9,28 @@ import { extractParameters } from "./matcher.js";
 function detectGender(text) {
   const lowerText = text.toLowerCase();
   
-  // Search for gender indicators
-  const femalePattern = /\b(gender|sex)\s*:\s*female\b|\b(gender|sex)\s*:\s*f\b|\bfemale\b/i;
-  const malePattern = /\b(gender|sex)\s*:\s*male\b|\b(gender|sex)\s*:\s*m\b|\bmale\b/i;
+  // 1. First search for explicit Gender/Sex prefix labels, which are highly accurate
+  const explicitFemalePattern = /\b(gender|sex)\s*:\s*(female|f)\b/i;
+  const explicitMalePattern = /\b(gender|sex)\s*:\s*(male|m)\b/i;
   
-  if (femalePattern.test(lowerText)) {
+  if (explicitFemalePattern.test(lowerText)) {
     return "female";
   }
-  if (malePattern.test(lowerText)) {
+  if (explicitMalePattern.test(lowerText)) {
     return "male";
   }
+  
+  // 2. Fall back to generic keyword presence ONLY if the explicit prefix was not found
+  const genericFemalePattern = /\bfemale\b/i;
+  const genericMalePattern = /\bmale\b/i;
+  
+  if (genericFemalePattern.test(lowerText) && !genericMalePattern.test(lowerText)) {
+    return "female";
+  }
+  if (genericMalePattern.test(lowerText) && !genericFemalePattern.test(lowerText)) {
+    return "male";
+  }
+  
   return "general";
 }
 

@@ -131,18 +131,48 @@
     }
   },
   {
-    "id": "blood_glucose",
+    "id": "glucose_fasting",
     "name": {
-      "en": "Blood Glucose",
-      "od": "ରକ୍ତ ଶର୍କରା"
+      "en": "Glucose Fasting",
+      "od": "ଉପବାସ ରକ୍ତ ଶର୍କରା (Fasting)"
     },
     "aliases": [
-      "blood sugar",
-      "glucose",
+      "glucose fasting",
+      "fasting glucose",
       "fbs",
       "fasting blood sugar",
-      "random blood sugar",
-      "rbs"
+      "glucose fasting (f)",
+      "glucose (f)"
+    ],
+    "category": "Diabetes",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 70,
+      "max": 100
+    },
+    "description": {
+      "en": "Measures blood sugar level after fasting overnight.",
+      "od": "ଉପବାସ ରକ୍ତ ଶର୍କରା ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low fasting blood sugar (Hypoglycemia) may cause weakness or dizziness.",
+      "normal": "Fasting blood sugar level is healthy.",
+      "high": "High fasting blood sugar (Hyperglycemia) may indicate prediabetes or diabetes."
+    }
+  },
+  {
+    "id": "glucose_postprandial",
+    "name": {
+      "en": "Glucose Post Prandial",
+      "od": "ଖାଇବା ପର ରକ୍ତ ଶର୍କରା (PP)"
+    },
+    "aliases": [
+      "glucose post prandial",
+      "post prandial glucose",
+      "ppbs",
+      "post prandial blood sugar",
+      "glucose post prandial (pp)",
+      "glucose (pp)"
     ],
     "category": "Diabetes",
     "unit": "mg/dL",
@@ -151,7 +181,37 @@
       "max": 140
     },
     "description": {
-      "en": "Measures sugar level in blood.",
+      "en": "Measures blood sugar level 2 hours after a meal.",
+      "od": "ଖାଇବା ପରେ ରକ୍ତ ଶର୍କରା ମାପେ।"
+    },
+    "remarks": {
+      "low": "Low post prandial blood sugar (Hypoglycemia) may cause weakness or dizziness.",
+      "normal": "Post prandial blood sugar level is healthy.",
+      "high": "High post prandial blood sugar (Hyperglycemia) may indicate prediabetes or diabetes."
+    }
+  },
+  {
+    "id": "blood_glucose",
+    "name": {
+      "en": "Blood Glucose",
+      "od": "ରକ୍ତ ଶର୍କରା"
+    },
+    "aliases": [
+      "blood sugar",
+      "glucose",
+      "random blood sugar",
+      "rbs",
+      "glucose random",
+      "random glucose"
+    ],
+    "category": "Diabetes",
+    "unit": "mg/dL",
+    "normalRange": {
+      "min": 70,
+      "max": 140
+    },
+    "description": {
+      "en": "Measures sugar level in blood (random/generic).",
       "od": "ରକ୍ତରେ ଶର୍କରାର ମାତ୍ରା ମାପେ।"
     },
     "remarks": {
