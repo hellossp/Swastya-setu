@@ -7,6 +7,7 @@ import AnalysisCard from "@/components/dashboard/AnalysisCard";
 import ResultTable from "@/components/dashboard/ResultTable";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import PastReportsModal from "@/components/modals/PastReportsModal";
 import { getReports, saveReport, deleteReport } from "@/lib/firebase";
 import { t } from "@/lib/translator";
 
@@ -17,6 +18,7 @@ export default function DashboardPage() {
   const [viewTab, setViewTab] = useState("cards"); // 'cards' or 'table'
   const [isSaved, setIsSaved] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [isPastModalOpen, setIsPastModalOpen] = useState(false);
 
   // Sync language state
   useEffect(() => {
@@ -158,6 +160,15 @@ export default function DashboardPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 shrink-0">
+            <button
+              onClick={() => setIsPastModalOpen(true)}
+              className="bg-[#7A3B2E] hover:bg-[#5c2b21] text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition shadow-sm flex items-center gap-1.5 cursor-pointer"
+            >
+              <svg className="w-4 h-4 text-[#D4A373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span>Past Analyzed Reports</span>
+            </button>
             <Link href="/upload" onClick={handleNewUpload}>
               <Button variant="outline" size="sm">
                 {t("btn_back_upload", lang)}
@@ -320,6 +331,13 @@ export default function DashboardPage() {
         )}
 
       </div>
+
+      {/* Past Analyzed Reports Modal */}
+      <PastReportsModal
+        isOpen={isPastModalOpen}
+        onClose={() => setIsPastModalOpen(false)}
+        onSelectReport={() => loadDashboardData()}
+      />
     </main>
   );
 }

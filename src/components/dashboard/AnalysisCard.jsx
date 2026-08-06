@@ -123,6 +123,38 @@ export default function AnalysisCard({ result, lang = "en" }) {
             </div>
           </div>
         )}
+
+        {/* User Accuracy & Feedback Widget */}
+        <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center text-xs">
+          <span className="text-gray-400 font-medium">Was this extracted value accurate?</span>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => {
+                const stored = JSON.parse(localStorage.getItem("swasthyaSetu_feedback") || "[]");
+                stored.push({ test: displayName, status: "accurate", time: Date.now() });
+                localStorage.setItem("swasthyaSetu_feedback", JSON.stringify(stored));
+                alert("Thank you! Your feedback helps us improve system accuracy.");
+              }}
+              className="px-2.5 py-1 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 font-bold border border-green-200 transition cursor-pointer"
+            >
+              👍 Accurate
+            </button>
+            <button
+              onClick={() => {
+                const feedbackText = prompt(`Please enter correct value for ${displayName}:`);
+                if (feedbackText) {
+                  const stored = JSON.parse(localStorage.getItem("swasthyaSetu_feedback") || "[]");
+                  stored.push({ test: displayName, correctedValue: feedbackText, status: "corrected", time: Date.now() });
+                  localStorage.setItem("swasthyaSetu_feedback", JSON.stringify(stored));
+                  alert("Thank you! Feedback recorded for model refinement.");
+                }
+              }}
+              className="px-2.5 py-1 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold border border-gray-200 transition cursor-pointer"
+            >
+              ✏️ Correct Value
+            </button>
+          </div>
+        </div>
       </div>
     </Card>
   );

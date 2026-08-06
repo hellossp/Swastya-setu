@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useRouter } from "next/navigation";
 import { performOCR } from "@/lib/ocr";
 import Loader from "@/components/ui/Loader";
+import PastReportsModal from "@/components/modals/PastReportsModal";
 
 // Helper to dynamically load PDF.js from CDN
 const loadPdfJs = () => {
@@ -270,8 +271,33 @@ export default function UploadBox() {
     maxSize: 10485760, // 10MB limit
   });
 
+  const [isPastModalOpen, setIsPastModalOpen] = useState(false);
+
   return (
-    <div className="bg-white/80 glass-card rounded-3xl shadow-xl p-4 sm:p-8 max-w-2xl mx-auto border border-white/50">
+    <div className="bg-white/80 glass-card rounded-3xl shadow-xl p-4 sm:p-8 max-w-2xl mx-auto border border-white/50 relative">
+      
+      {/* Top Past Analyzed Reports Quick Trigger */}
+      <div className="mb-6 p-4 bg-gradient-to-r from-[#7A3B2E] to-[#A35C4A] text-white rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3 shadow-md">
+        <div className="flex items-center gap-3 text-center sm:text-left">
+          <div className="p-2 bg-white/10 rounded-xl shrink-0">
+            <svg className="w-6 h-6 text-[#D4A373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="font-extrabold text-sm sm:text-base">Past Analyzed Reports Archive</h4>
+            <p className="text-xs text-[#F5EFE6]/90">Explore verified pre-analyzed pathology reports</p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setIsPastModalOpen(true)}
+          className="bg-[#D4A373] hover:bg-[#c29161] text-[#4A2016] px-4 py-2 rounded-xl text-xs font-black transition shadow-sm whitespace-nowrap cursor-pointer hover:scale-105 active:scale-95"
+        >
+          View Past Reports →
+        </button>
+      </div>
+
       {loading ? (
         <div className="py-12 flex flex-col items-center">
           <Loader 
@@ -330,6 +356,12 @@ export default function UploadBox() {
           )}
         </div>
       )}
+
+      {/* Past Analyzed Reports Modal */}
+      <PastReportsModal
+        isOpen={isPastModalOpen}
+        onClose={() => setIsPastModalOpen(false)}
+      />
     </div>
   );
 }
