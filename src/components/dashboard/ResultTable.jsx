@@ -8,6 +8,53 @@ export default function ResultTable({ results = [], lang = "en" }) {
   const data = results || [];
   if (data.length === 0) return null;
 
+  // Safe Parameter Name Extractor
+  const getDisplayName = (row) => {
+    if (!row) return "";
+    if (typeof row.name === "object" && row.name !== null) {
+      if (lang === "od" && row.name.od) return row.name.od;
+      if (row.name.en) return row.name.en;
+    }
+    return row.testName || row.parameter || (typeof row.name === "string" ? row.name : "Medical Test");
+  };
+
+  // Safe Reference Range Extractor
+  const getNormalRangeStr = (row) => {
+    if (!row || row.normalRange === undefined || row.normalRange === null) return "N/A";
+    if (typeof row.normalRange === "string") return row.normalRange;
+    if (typeof row.normalRange === "number") return String(row.normalRange);
+    if (typeof row.normalRange === "object") {
+      if (row.normalRange.male && row.normalRange.female) {
+        return `Male: ${row.normalRange.male.min}-${row.normalRange.male.max} | Female: ${row.normalRange.female.min}-${row.normalRange.female.max}`;
+      }
+      if (row.normalRange.min !== undefined && row.normalRange.max !== undefined) {
+        return `${row.normalRange.min} - ${row.normalRange.max} ${row.unit || ""}`;
+      }
+    }
+    return String(row.normalRange);
+  };
+
+  // Safe Category Extractor
+  const getCategoryStr = (row) => {
+    if (!row || !row.category) return "";
+    if (typeof row.category === "string") {
+      return lang === "od" ? t(row.category, "od") : row.category;
+    }
+    return "";
+  };
+
+  // Safe Remark Extractor
+  const getRemarkStr = (row) => {
+    if (!row || !row.remark) return "";
+    if (typeof row.remark === "string") {
+      return lang === "od" ? t(row.remark, "od") : row.remark;
+    }
+    if (typeof row.remark === "object") {
+      return lang === "od" && row.remark.od ? row.remark.od : row.remark.en || "";
+    }
+    return "";
+  };
+
   return (
     <div className="w-full overflow-x-auto rounded-2xl border border-gray-200/60 bg-white/70 shadow-sm">
       <table className="w-full text-left border-collapse">
@@ -22,10 +69,10 @@ export default function ResultTable({ results = [], lang = "en" }) {
         </thead>
         <tbody className="divide-y divide-gray-100 text-sm">
           {data.map((row, idx) => {
-            const displayName = lang === "od" && row.name.od ? row.name.od : row.name.en;
-            
-            // Translate remark dynamically
-            const displayRemark = lang === "od" ? t(row.remark, "od") : row.remark;
+            const displayName = getDisplayName(row);
+            const categoryName = getCategoryStr(row);
+            const rangeStr = getNormalRangeStr(row);
+            const displayRemark = getRemarkStr(row);
 
             return (
               <tr 
@@ -34,21 +81,23 @@ export default function ResultTable({ results = [], lang = "en" }) {
               >
                 <td className="p-3 sm:p-4">
                   <div className="font-bold text-gray-800">{displayName}</div>
-                  <div className="text-xs text-gray-400 font-medium">
-                    {lang === "en" ? row.category : t(row.category, "od")}
-                  </div>
+                  {categoryName && (
+                    <div className="text-xs text-gray-400 font-medium">
+                      {categoryName}
+                    </div>
+                  )}
                 </td>
                 <td className="p-3 sm:p-4 font-extrabold text-primary-maroon">
-                  {row.value} <span className="text-xs font-semibold text-gray-400">{row.unit}</span>
+                  {row.value !== undefined && row.value !== null ? row.value : "-"} <span className="text-xs font-semibold text-gray-400">{row.unit || ""}</span>
                 </td>
                 <td className="p-3 sm:p-4 font-semibold text-gray-600">
-                  {row.normalRange}
+                  {rangeStr}
                 </td>
                 <td className="p-3 sm:p-4">
-                  <StatusBadge status={row.status} lang={lang} />
+                  <StatusBadge status={row.status || "Normal"} lang={lang} />
                 </td>
                 <td className="p-3 sm:p-4 text-gray-600 max-w-xs font-medium leading-relaxed italic">
-                  "{displayRemark}"
+                  {displayRemark ? `"${displayRemark}"` : "-"}
                 </td>
               </tr>
             );
